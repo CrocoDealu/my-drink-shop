@@ -1,0 +1,136 @@
+classDiagram
+    direction TB
+
+%% Interfaces and Abstract Classes
+    class Entity
+
+    class Repository~ID; E~ {
+        <<interface>>
+    }
+    class Validator~T~ {
+        <<interface>>
+    }
+    class AbstractRepository~ID; E~
+    class FileAbstractRepository~ID; E~
+
+    class OrderRepository {
+        <<interface>>
+    }
+    class ProductRepository {
+        <<interface>>
+    }
+    class RetetaRepository {
+        <<interface>>
+    }
+    class StocRepository {
+        <<interface>>
+    }
+
+%% Enums
+    class CategorieBautura {
+        <<enumeration>>
+    }
+    class TipBautura {
+        <<enumeration>>
+    }
+
+%% Domain Models
+    class Product
+    class Order
+    class OrderItem
+    class IngredientReteta
+    class Reteta
+    class Stoc
+    class ValidationException
+
+%% Repositories
+    class FileOrderRepository
+    class FileProductRepository
+    class FileRetetaRepository
+    class FileStocRepository
+
+%% Services
+    class DailyReportService
+    class DrinkShopService
+    class OrderService
+    class ProductService
+    class RetetaService
+    class StocService
+
+%% Validators
+    class OrderItemValidator
+    class OrderValidator
+    class ProductValidator
+    class RetetaValidator
+    class StocValidator
+
+%% Controller and Main
+    class DrinkShopController
+    class DrinkShopApp
+    class ProductTest
+    class CsvExporter
+    class ReceiptGenerator
+
+%% Inheritance and Implementations
+    AbstractRepository ..|> Repository
+    FileAbstractRepository --|> AbstractRepository
+
+    OrderRepository --|> Repository
+    ProductRepository --|> Repository
+    RetetaRepository --|> Repository
+    StocRepository --|> Repository
+
+    FileOrderRepository --|> FileAbstractRepository
+    FileOrderRepository ..|> OrderRepository
+
+    FileProductRepository --|> FileAbstractRepository
+    FileProductRepository ..|> ProductRepository
+
+    FileRetetaRepository --|> FileAbstractRepository
+    FileRetetaRepository ..|> RetetaRepository
+
+    FileStocRepository --|> FileAbstractRepository
+    FileStocRepository ..|> StocRepository
+
+    OrderItemValidator ..|> Validator
+    OrderValidator ..|> Validator
+    ProductValidator ..|> Validator
+    RetetaValidator ..|> Validator
+    StocValidator ..|> Validator
+
+    Product --|> Entity
+    Order --|> Entity
+    OrderItem --|> Entity
+    IngredientReteta --|> Entity
+    Reteta --|> Entity
+    Stoc --|> Entity
+
+%% Associations and Aggregations
+    DailyReportService "1" *-- "1 repo" OrderRepository
+    DrinkShopController "1" *-- "1 service" DrinkShopService
+    DrinkShopController "1" *-- "*" IngredientReteta : newRetetaList
+    DrinkShopController "1" *-- "1 currentOrder" Order
+    DrinkShopController "1" *-- "*" OrderItem : currentOrderItems
+    DrinkShopController "1" *-- "*" Product : productList
+    DrinkShopController "1" *-- "*" Reteta : retetaList
+
+    DrinkShopService "1" *-- "1 report" DailyReportService
+    DrinkShopService "1" *-- "1 orderService" OrderService
+    DrinkShopService "1" *-- "1 productService" ProductService
+    DrinkShopService "1" *-- "1 retetaService" RetetaService
+    DrinkShopService "1" *-- "1 stocService" StocService
+
+    FileOrderRepository "1" *-- "1 productRepository" ProductRepository
+    Order "1" *-- "*" OrderItem : items
+    OrderItem "1" *-- "1 product" Product
+    OrderService "1" *-- "1 orderRepo" OrderRepository
+    OrderValidator "1" *-- "1 itemValidator" OrderItemValidator
+
+    Product "1" *-- "1 categorie" CategorieBautura
+    Product "1" *-- "1 tip" TipBautura
+    ProductService "1" *-- "1 productRepo" ProductRepository
+    ProductTest "1" *-- "1 product" Product
+
+    Reteta "1" *-- "*" IngredientReteta : ingrediente
+    RetetaService "1" *-- "1 retetaRepo" RetetaRepository
+    StocService "1" *-- "1 stocRepo" StocRepository
