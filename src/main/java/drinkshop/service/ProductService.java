@@ -1,6 +1,7 @@
 package drinkshop.service;
 
 import drinkshop.domain.*;
+import drinkshop.repository.ProductRepository;
 import drinkshop.repository.Repository;
 
 import java.util.List;
@@ -8,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class ProductService {
 
-    private final Repository<Integer, Product> productRepo;
+    private final ProductRepository productRepo;
 
-    public ProductService(Repository<Integer, Product> productRepo) {
+    public ProductService(ProductRepository productRepo) {
         this.productRepo = productRepo;
     }
 

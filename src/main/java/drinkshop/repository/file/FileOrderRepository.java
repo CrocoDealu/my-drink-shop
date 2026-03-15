@@ -3,13 +3,14 @@ package drinkshop.repository.file;
 import drinkshop.domain.Order;
 import drinkshop.domain.OrderItem;
 import drinkshop.domain.Product;
+import drinkshop.repository.OrderRepository;
 import drinkshop.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileOrderRepository
-        extends FileAbstractRepository<Integer, Order> {
+        extends FileAbstractRepository<Integer, Order> implements OrderRepository {
 
     private Repository<Integer, Product> productRepository;
 

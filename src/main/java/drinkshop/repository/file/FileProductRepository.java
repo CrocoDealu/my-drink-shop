@@ -3,9 +3,10 @@ package drinkshop.repository.file;
 import drinkshop.domain.Product;
 import drinkshop.domain.CategorieBautura;
 import drinkshop.domain.TipBautura;
+import drinkshop.repository.ProductRepository;
 
 public class FileProductRepository
-        extends FileAbstractRepository<Integer, Product> {
+        extends FileAbstractRepository<Integer, Product> implements ProductRepository {
 
     public FileProductRepository(String fileName) {
         super(fileName);

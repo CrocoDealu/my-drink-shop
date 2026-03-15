@@ -2,25 +2,14 @@ package drinkshop.domain;
 
 import java.util.List;
 
-public class Reteta {
+public class Reteta extends Entity<Integer> {
 
-    private int id;
     private List<IngredientReteta> ingrediente;
 
     public Reteta(int id, List<IngredientReteta> ingrediente) {
-        this.id = id;
+        super(id);
         this.ingrediente = ingrediente;
-
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
 
     public List<IngredientReteta> getIngrediente() {
         return ingrediente;
@@ -33,7 +22,7 @@ public class Reteta {
     @Override
     public String toString() {
         return "Reteta{" +
-                "productId=" + id +
+                "productId=" + this.getId() +
                 ", ingrediente=" + ingrediente +
                 '}';
     }
