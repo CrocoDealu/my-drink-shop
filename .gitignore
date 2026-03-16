@@ -1,0 +1,22 @@
+# Maven - Fișiere compilate și log-uri
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# SonarQube
+.scannerwork/
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Sistem - macOS
+.DS_Store
+
+# Date proiect (opțional, dacă nu vrei să le partajezi)
+orders.csv
+data/
