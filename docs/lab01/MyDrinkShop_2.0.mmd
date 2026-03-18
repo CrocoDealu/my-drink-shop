@@ -1,0 +1,184 @@
+classDiagram
+    direction TB
+
+%% Interfaces and Abstract Classes
+    class Entity~ID~ {
+        -ID id
+        +getId() ID
+        +setId(ID)
+    }
+
+    class Repository~ID, E~ {
+<<interface>>
++findOne(ID) E
++findAll() List~E~
++save(E) E
++delete(ID) E
++update(E) E
+}
+
+class AbstractRepository~ID, E~ {
+#Map~ID, E~ entities
+#getId(E) ID
+}
+
+class FileAbstractRepository~ID, E~ {
+#String fileName
+#loadFromFile()
+-writeToFile()
+#extractEntity(String) E
+#createEntityAsString(E) String
+}
+
+class OrderRepository { <<interface>> }
+class ProductRepository { <<interface>> }
+class RetetaRepository { <<interface>> }
+class StocRepository { <<interface>> }
+
+%% Enums
+class TipBautura {
+<<enumeration>>
+BASIC, DAIRY, LACTOSE_FREE, WATER_BASED, PLANT_BASED, POWDER, ALL
+}
+class CategorieBautura {
+<<enumeration>>
+}
+
+%% Domain Models
+class Product {
+-String nume
+-double pret
++getNume() String
++getPret() double
+    }
+
+class Order {
+-double totalPrice
++getTotalPrice() double
++computeTotalPrice()
++addItem(OrderItem)
++removeItem(OrderItem)
+}
+
+class OrderItem {
+-int quantity
++getQuantity() int
++getTotal() double
+}
+
+class IngredientReteta {
+-String denumire
+-double cantitate
++getDenumire() String
++getCantitate() double
+    }
+
+class Reteta {
+    }
+
+class Stoc {
+-String ingredient
+-double cantitate
+-double stocMinim
++isSubMinim() boolean
+}
+
+%% Services
+class DailyReportService {
++getTotalRevenue() double
+}
+
+class DrinkShopService {
++addProduct(Product)
++addOrder(Order)
++comandaProdus(Product)
++exportCsv(String)
++getDailyRevenue() double
+    }
+
+class OrderService {
++addOrder(Order)
++getAllOrders() List~Order~
++computeTotal(Order) double
+}
+
+class ProductService {
++addProduct(Product)
++getAllProducts() List~Product~
++filterByCategorie(CategorieBautura) List~Product~
++filterByTip(TipBautura) List~Product~
+}
+
+class RetetaService {
++addReteta(Reteta)
++getAll() List~Reteta~
+}
+
+class StocService {
++areSuficient(Reteta) boolean
++consuma(Reteta)
+}
+
+%% Controller
+class DrinkShopController {
++setService(DrinkShopService)
+-initData()
+-updateOrderTotal()
+}
+
+%% Inheritance
+AbstractRepository ..|> Repository
+FileAbstractRepository --|> AbstractRepository
+
+OrderRepository --|> Repository
+ProductRepository --|> Repository
+RetetaRepository --|> Repository
+StocRepository --|> Repository
+
+FileOrderRepository --|> FileAbstractRepository
+FileOrderRepository ..|> OrderRepository
+
+FileProductRepository --|> FileAbstractRepository
+FileProductRepository ..|> ProductRepository
+
+FileRetetaRepository --|> FileAbstractRepository
+FileRetetaRepository ..|> RetetaRepository
+
+FileStocRepository --|> FileAbstractRepository
+FileStocRepository ..|> StocRepository
+
+Product --|> Entity
+Order --|> Entity
+IngredientReteta --|> Entity
+Reteta --|> Entity
+Stoc --|> Entity
+
+%% Associations & Aggregations (Replacing Attributes)
+DrinkShopController "1" --> "1" DrinkShopService : service
+DrinkShopController "1" --> "*" IngredientReteta : newRetetaList
+DrinkShopController "1" --> "1" Order : currentOrder
+DrinkShopController "1" --> "*" OrderItem : currentOrderItems
+DrinkShopController "1" --> "*" Product : productList
+DrinkShopController "1" --> "*" Reteta : retetaList
+
+DrinkShopService "1" --> "1" DailyReportService : report
+DrinkShopService "1" --> "1" OrderService : orderService
+DrinkShopService "1" --> "1" ProductService : productService
+DrinkShopService "1" --> "1" RetetaService : retetaService
+DrinkShopService "1" --> "1" StocService : stocService
+
+Order "1" *-- "*" OrderItem : items
+OrderItem "1" --> "1" Product : product
+
+OrderService "1" --> "1" OrderRepository : orderRepo
+OrderService "1" --> "1" ProductRepository : productRepo
+
+Product "1" --> "1" CategorieBautura : categorie
+Product "1" --> "1" TipBautura : tip
+
+ProductService "1" --> "1" ProductRepository : productRepo
+
+Reteta "1" *-- "*" IngredientReteta : ingrediente
+RetetaService "1" --> "1" RetetaRepository : retetaRepo
+
+StocService "1" --> "1" StocRepository : stocRepo
