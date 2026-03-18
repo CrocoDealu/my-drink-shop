@@ -1,7 +1,7 @@
 package drinkshop.ui;
 
 import drinkshop.domain.*;
-import drinkshop.repository.*;
+import drinkshop.repository.Repository;
 import drinkshop.repository.file.FileOrderRepository;
 import drinkshop.repository.file.FileProductRepository;
 import drinkshop.repository.file.FileRetetaRepository;
@@ -18,10 +18,10 @@ public class DrinkShopApp extends Application {
     public void start(Stage stage) throws Exception {
 
         // ---------- Initializare Repository-uri care citesc din fisiere ----------
-        ProductRepository productRepo = new FileProductRepository("data/products.txt");
-        OrderRepository orderRepo = new FileOrderRepository("data/orders.txt", productRepo);
-        RetetaRepository retetaRepo = new FileRetetaRepository("data/retete.txt");
-        StocRepository stocRepo = new FileStocRepository("data/stocuri.txt");
+        Repository<Integer, Product> productRepo = new FileProductRepository("data/products.txt");
+        Repository<Integer, Order> orderRepo = new FileOrderRepository("data/orders.txt", productRepo);
+        Repository<Integer, Reteta> retetaRepo = new FileRetetaRepository("data/retete.txt");
+        Repository<Integer, Stoc> stocRepo = new FileStocRepository("data/stocuri.txt");
 
         // ---------- Initializare Service ----------
         DrinkShopService service = new DrinkShopService(productRepo, orderRepo, retetaRepo, stocRepo);

@@ -4,8 +4,10 @@ import drinkshop.domain.*;
 import drinkshop.export.CsvExporter;
 import drinkshop.receipt.ReceiptGenerator;
 import drinkshop.reports.DailyReportService;
-import drinkshop.repository.*;
+import drinkshop.repository.Repository;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.List;
 
 public class DrinkShopService {
@@ -17,15 +19,15 @@ public class DrinkShopService {
     private final DailyReportService report;
 
     public DrinkShopService(
-            ProductRepository productRepo,
-            OrderRepository orderRepo,
-            RetetaRepository retetaRepo,
-            StocRepository stocRepo
+            Repository<Integer, Product> productRepo,
+            Repository<Integer, Order> orderRepo,
+            Repository<Integer, Reteta> retetaRepo,
+            Repository<Integer, Stoc> stocService
     ) {
         this.productService = new ProductService(productRepo);
         this.orderService = new OrderService(orderRepo, productRepo);
         this.retetaService = new RetetaService(retetaRepo);
-        this.stocService = new StocService(stocRepo);
+        this.stocService = new StocService(stocService);
         this.report = new DailyReportService(orderRepo);
     }
 
@@ -76,7 +78,11 @@ public class DrinkShopService {
     }
 
     public void exportCsv(String path) {
-        CsvExporter.exportOrders(productService.getAllProducts(), orderService.getAllOrders(), path);
+        try {
+            CsvExporter.exportOrders(productService.getAllProducts(), orderService.getAllOrders(), path);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     // ---------- STOCK + RECIPE ----------

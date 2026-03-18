@@ -1,10 +1,9 @@
 package drinkshop.repository.file;
 
 import drinkshop.domain.Stoc;
-import drinkshop.repository.StocRepository;
 
 public class FileStocRepository
-        extends FileAbstractRepository<Integer, Stoc> implements StocRepository {
+        extends FileAbstractRepository<Integer, Stoc> {
 
     public FileStocRepository(String fileName) {
         super(fileName);

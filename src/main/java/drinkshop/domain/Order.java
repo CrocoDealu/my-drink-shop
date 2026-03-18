@@ -4,21 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order extends Entity<Integer> {
+public class Order implements Serializable {
 
+    private int id;
     private List<OrderItem> items;
     private double totalPrice;
 
     public Order(int id) {
-        super(id);
+        this.id = id;
         this.items = new ArrayList<>();
         this.totalPrice = 0.0;
     }
 
     public Order(int id, List<OrderItem> items, double totalPrice) {
-        super(id);
+        this.id = id;
         this.items = new ArrayList<>(items);
         this.totalPrice = totalPrice;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public List<OrderItem> getItems() {
@@ -48,14 +53,10 @@ public class Order extends Entity<Integer> {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + this.getId() +
+                "id=" + id +
                 ", items=" + items +
                 ", totalPrice=" + totalPrice +
                 '}';
-    }
-
-    public double getTotal() {
-        return totalPrice;
     }
 
     public void computeTotalPrice() {

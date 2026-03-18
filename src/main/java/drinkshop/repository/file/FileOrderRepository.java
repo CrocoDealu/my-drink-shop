@@ -3,14 +3,13 @@ package drinkshop.repository.file;
 import drinkshop.domain.Order;
 import drinkshop.domain.OrderItem;
 import drinkshop.domain.Product;
-import drinkshop.repository.OrderRepository;
 import drinkshop.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileOrderRepository
-        extends FileAbstractRepository<Integer, Order> implements OrderRepository {
+        extends FileAbstractRepository<Integer, Order> {
 
     private Repository<Integer, Product> productRepository;
 
@@ -57,7 +56,7 @@ public class FileOrderRepository
 
         for (OrderItem item : entity.getItems()) {
 
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append("|");
             }
 

@@ -3,18 +3,16 @@ package drinkshop.service;
 import drinkshop.domain.Order;
 import drinkshop.domain.OrderItem;
 import drinkshop.domain.Product;
-import drinkshop.repository.OrderRepository;
-import drinkshop.repository.ProductRepository;
 import drinkshop.repository.Repository;
 
 import java.util.List;
 
 public class OrderService {
 
-    private final OrderRepository orderRepo;
-    private final ProductRepository productRepo;
+    private final Repository<Integer, Order> orderRepo;
+    private final Repository<Integer, Product> productRepo;
 
-    public OrderService(OrderRepository orderRepo, ProductRepository productRepo) {
+    public OrderService(Repository<Integer, Order> orderRepo, Repository<Integer, Product> productRepo) {
         this.orderRepo = orderRepo;
         this.productRepo = productRepo;
 
@@ -33,8 +31,7 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
-//        return StreamSupport.stream(orderRepo.findAll().spliterator(), false)
-//                .collect(Collectors.toList());
+
         return orderRepo.findAll();
     }
 

@@ -1,7 +1,8 @@
 package drinkshop.domain;
 
-public class Product extends Entity<Integer> {
+public class Product {
 
+    private int id;
     private String nume;
     private double pret;
     private CategorieBautura categorie;
@@ -10,13 +11,14 @@ public class Product extends Entity<Integer> {
     public Product(int id, String nume, double pret,
                   CategorieBautura categorie,
                   TipBautura tip) {
-        super(id);
+        this.id = id;
         this.nume = nume;
         this.pret = pret;
         this.categorie = categorie;
         this.tip = tip;
     }
 
+    public int getId() { return id; }
     public String getNume() { return nume; }
     public double getPret() { return pret; }
     public CategorieBautura getCategorie() { return categorie; }

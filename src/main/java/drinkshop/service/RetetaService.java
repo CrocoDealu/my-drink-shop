@@ -2,15 +2,14 @@ package drinkshop.service;
 
 import drinkshop.domain.Reteta;
 import drinkshop.repository.Repository;
-import drinkshop.repository.RetetaRepository;
 
 import java.util.List;
 
 public class RetetaService {
 
-    private final RetetaRepository retetaRepo;
+    private final Repository<Integer, Reteta> retetaRepo;
 
-    public RetetaService(RetetaRepository retetaRepo) {
+    public RetetaService(Repository<Integer, Reteta> retetaRepo) {
         this.retetaRepo = retetaRepo;
     }
 

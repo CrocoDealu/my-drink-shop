@@ -4,16 +4,14 @@ import drinkshop.domain.IngredientReteta;
 import drinkshop.domain.Reteta;
 import drinkshop.domain.Stoc;
 import drinkshop.repository.Repository;
-import drinkshop.repository.StocRepository;
 
 import java.util.List;
-import java.util.Map;
 
 public class StocService {
 
-    private final StocRepository stocRepo;
+    private final Repository<Integer, Stoc> stocRepo;
 
-    public StocService(StocRepository stocRepo) {
+    public StocService(Repository<Integer, Stoc> stocRepo) {
         this.stocRepo = stocRepo;
     }
 

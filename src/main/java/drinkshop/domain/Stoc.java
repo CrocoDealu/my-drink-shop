@@ -1,19 +1,24 @@
 package drinkshop.domain;
 
-public class Stoc extends Entity<Integer>{
+public class Stoc {
 
+    private int id;
     private String ingredient;
     private double cantitate;
     private double stocMinim;
 
     public Stoc(int id, String ingredient, int cantitate, int stocMinim) {
-        super(id);
+        this.id = id;
         this.ingredient = ingredient;
         this.cantitate = cantitate;
         this.stocMinim = stocMinim;
     }
 
     // --- getters ---
+    public int getId() {
+        return id;
+    }
+
     public String getIngredient() {
         return ingredient;
     }

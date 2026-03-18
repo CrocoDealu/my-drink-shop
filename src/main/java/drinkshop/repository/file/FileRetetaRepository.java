@@ -2,14 +2,13 @@ package drinkshop.repository.file;
 
 import drinkshop.domain.IngredientReteta;
 import drinkshop.domain.Reteta;
-import drinkshop.repository.RetetaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileRetetaRepository
-        extends FileAbstractRepository<Integer, Reteta> implements RetetaRepository {
+        extends FileAbstractRepository<Integer, Reteta> {
 
     public FileRetetaRepository(String fileName) {
         super(fileName);
