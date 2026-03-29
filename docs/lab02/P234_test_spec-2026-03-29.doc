@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>testspec Proiect234 - meir3555_BBT</title>
+<link type="text/css" rel="stylesheet" href="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/css/tl_documents.css" />
+<style type="text/css" media="print">.notprintable { display:none;}</style>
+</head>
+<body>
+<div>
+<div style="float:right;">TestLink Community [configure $tlCfg-&gt;document_generator-&gt;company_name]</div>
+<div>&nbsp;</div><hr />
+<p style="text-align: center;"><img alt="TestLink logo" title="configure using $tlCfg->document_generator->company_logo"  width= height= src="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/images/tl-logo-transparent-25.png" /></p></div>
+<div class="doc_title"><p>Test Specification</p></div>
+<div class="doc_title" style="text-align:left;margin: auto;"><p>Test Project: Proiect234<br/>Test Suite: Proiect234 - meir3555_BBT</p></div>
+<div class="summary"><p id="printedby">Printed by TestLink on 29/03/2026</p></div>
+<div class="pagefooter" id="copyright">2012 &copy; TestLink Community</div>
+<h1 class="general" style="page-break-before: always">Table Of Contents</h1><div class="toc"><p style="padding-left: 20px;"><b><a href="#toc_1">1.meir3555_BBT</a></b></p>
+<p style="padding-left: 45px;"><a href="#toc_tc29007">P234-11: meir3555_ECP_Valid_AddProduct</a></p><p style="padding-left: 45px;"><a href="#toc_tc29013">P234-12: meir3555_ECP_Invalid_AddProduct_BlankName</a></p><p style="padding-left: 45px;"><a href="#toc_tc29016">P234-13: meir3555_BVA_Valid_AddProduct_PriceAboveZero</a></p><p style="padding-left: 45px;"><a href="#toc_tc29019">P234-14: meir3555_BVA_Invalid_AddProduct_PriceZero</a></p></div><h1 class="doclevel" >Scope</h1>
+<div class="txtlevel"><p>Proiect de testare pentru studentii din grupa 234.</p></div>
+ <br/><a name='toc_1'></a>
+<h1 class='doclevel'>1.Test Suite : meir3555_BBT</h1>
+<div><p>Suita&nbsp;de teste black-box pentru cerinta F01 - adaugarea produselor&nbsp;in MyDrinkShop.<br />
+Include 4 cazuri de testare: ECP valid, ECP invalid, BVA valid, BVA invalid.</p>
+</div><a name="toc_tc29007"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P234-11: meir3555_ECP_Valid_AddProduct&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">meir3555</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifica&nbsp;adaugarea unui produs nou cu date valide din clase de echivalenta&nbsp;valide.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><p>Administratorul este in&nbsp;ecranul de gestionare produse.<br />
+Exista&nbsp;cel putin o reteta&nbsp;selectabila&nbsp;in tabelul de retete.<br />
+Nu exista&nbsp;deja un produs cu ID-ul retetei selectate.</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>1. Se selecteaza&nbsp;o reteta&nbsp;existenta&nbsp;din tabelul de retete.<br />
+2. Se introduce numele produsului: Latte.<br />
+3. Se introduce pretul: 15.5.<br />
+4. Se selecteaza&nbsp;categoria: MILK_COFFEE.<br />
+5. Se selecteaza&nbsp;tipul: DAIRY.<br />
+6. Se apasa&nbsp;butonul Add.</p>
+</td><td><p>Produsul este adaugat cu succes.<br />
+Produsul apare in lista de produse.<br />
+Valorile salvate sunt:<br />
+- nume = Latte<br />
+- pret&nbsp;= 15.5<br />
+- categorie = MILK_COFFEE<br />
+- tip = DAIRY<br />
+- ID = ID-ul retetei selectate.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Manual</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">meir3555_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29013"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P234-12: meir3555_ECP_Invalid_AddProduct_BlankName&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">meir3555</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifica&nbsp;respingerea adaugarii unui produs nou cu nume invalid (gol).</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><p>Administratorul este in ecranul de gestionare produse.<br />
+Exista&nbsp;cel putin o reteta&nbsp;selectabila&nbsp;in tabelul de retete.<br />
+Nu exista&nbsp;deja un produs cu ID-ul retetei selectate.</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>1. Se selecteaza&nbsp;o reteta&nbsp;existenta&nbsp;din tabelul de retete.<br />
+2. Se introduce numele produsului: &quot; &quot; (blank).<br />
+3. Se introduce pretul: 12.0.<br />
+4. Se selecteaza&nbsp;categoria: CLASSIC_COFFEE.<br />
+5. Se selecteaza&nbsp;tipul: BASIC.<br />
+6. Se apasa&nbsp;butonul Add.</p>
+</td><td><p>Sistemul trebuie sa&nbsp;respinga&nbsp;adaugarea produsului.<br />
+Se afiseaza&nbsp;un mesaj de eroare privind numele invalid.<br />
+Produsul nu este salvat si nu apare in lista de produse.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Manual</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">meir3555_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29016"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P234-13: meir3555_BVA_Valid_AddProduct_PriceAboveZero&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">meir3555</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifica&nbsp;adaugarea unui produs nou pentru valoarea de frontiera&nbsp;valida&nbsp;a pretului.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><p>Administratorul este in ecranul de gestionare produse.<br />
+Exista&nbsp;cel putin o reteta&nbsp;selectabila&nbsp;in tabelul de retete.<br />
+Nu exista&nbsp;deja un produs cu ID-ul retetei selectate.</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>1. Se selecteaza&nbsp;o reteta&nbsp;existenta&nbsp;din tabelul de retete.<br />
+2. Se introduce numele produsului: Espresso.<br />
+3. Se introduce pretul: 0.01.<br />
+4. Se selecteaza&nbsp;categoria: CLASSIC_COFFEE.<br />
+5. Se selecteaza&nbsp;tipul: BASIC.<br />
+6. Se apasa&nbsp;butonul Add.</p>
+</td><td><p>Produsul este adaugat cu succes.<br />
+Produsul apare in lista de produse cu pretul 0.01.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Manual</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">meir3555_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29019"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P234-14: meir3555_BVA_Invalid_AddProduct_PriceZero&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">meir3555</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifica respingerea adaugarii unui produs nou pentru valoarea de frontiera invalida a pretului.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><p>Administratorul este in ecranul de gestionare produse.<br />
+Exista cel putin o reteta selectabila in tabelul de retete.<br />
+Nu exista deja un produs cu ID-ul retetei selectate.</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>1. Se selecteaza o reteta existenta din tabelul de retete.<br />
+2. Se introduce numele produsului: Americano.<br />
+3. Se introduce pretul: 0.<br />
+4. Se selecteaza categoria: CLASSIC_COFFEE.<br />
+5. Se selecteaza tipul: WATER_BASED.<br />
+6. Se apasa butonul Add.</p>
+</td><td><p>Sistemul trebuie sa respinga adaugarea produsului.<br />
+Se afiseaza un mesaj de eroare privind pretul invalid.<br />
+Produsul nu este salvat si nu apare in lista de produse.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Manual</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">meir3555_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+
+</body>
+</html>
