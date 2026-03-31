@@ -10,11 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
 class ProductServiceTest {
 
     private Repository<Integer, Product> mockRepo;
-    private Validator<Product> validator;
     private ProductService productService;
 
     @BeforeEach
@@ -25,31 +23,70 @@ class ProductServiceTest {
     }
 
     @Test
-    void testAddProduct_ValidProduct_SavesToRepo() {
-        Product validProduct = new Product(1, "Fanta", 15.0, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
-        
-        productService.addProduct(validProduct);
-        
-        verify(mockRepo, times(1)).save(validProduct);
+    void testTC1_ECP_ValidProduct() {
+        Product p = new Product(1, "Latte", 15.5, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        productService.addProduct(p);
+        verify(mockRepo, times(1)).save(p);
     }
 
     @Test
-    void testAddProduct_InvalidName_ThrowsException() {
-        // Nume gol
-        Product invalidProduct = new Product(1, "", 15.0, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
-        
-        assertThrows(ValidationException.class, () -> productService.addProduct(invalidProduct));
-        
-        // Verificăm că NU s-a apelat metoda save (a picat la validare)
-        verify(mockRepo, never()).save(any());
+    void testTC2_ECP_NullName() {
+        Product p = new Product(2, null, 15.5, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        assertThrows(ValidationException.class, () -> productService.addProduct(p));
     }
 
     @Test
-    void testAddProduct_InvalidPrice_ThrowsException() {
-        // Preț negativ sau zero
-        Product invalidProduct = new Product(1, "Fanta", -1.0, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
-        
-        assertThrows(ValidationException.class, () -> productService.addProduct(invalidProduct));
-        verify(mockRepo, never()).save(any());
+    void testTC4_ECP_NegativePrice() {
+        Product p = new Product(4, "Latte", -1.0, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        assertThrows(ValidationException.class, () -> productService.addProduct(p));
+    }
+
+    @Test
+    void testTC5_ECP_NullCategory() {
+        Product p = new Product(5, "Latte", 15.5, null, TipBautura.DAIRY);
+        assertThrows(ValidationException.class, () -> productService.addProduct(p));
+    }
+
+    // --- BVA TESTS ---
+
+    @Test
+    void testTC3_BVA_NameLength1() {
+        Product p = new Product(10, "M", 15.5, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        productService.addProduct(p);
+        verify(mockRepo).save(p);
+    }
+
+    @Test
+    void testTC5_BVA_NameLength255() {
+        String longName = "a".repeat(255);
+        Product p = new Product(12, longName, 15.5, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        productService.addProduct(p);
+        verify(mockRepo).save(p);
+    }
+
+    @Test
+    void testTC6_BVA_NameLength256_Invalid() {
+        String tooLongName = "a".repeat(256);
+        Product p = new Product(13, tooLongName, 15.5, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        assertThrows(ValidationException.class, () -> productService.addProduct(p));
+    }
+
+    @Test
+    void testTC7_BVA_PriceZero_Invalid() {
+        Product p = new Product(14, "Latte", 0.0, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        assertThrows(ValidationException.class, () -> productService.addProduct(p));
+    }
+
+    @Test
+    void testTC8_BVA_PriceMinimumValid() {
+        Product p = new Product(15, "Latte", 0.01, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        productService.addProduct(p);
+        verify(mockRepo).save(p);
+    }
+
+    @Test
+    void testTC9_BVA_PriceNegativeBoundary() {
+        Product p = new Product(16, "Latte", -0.01, CategorieBautura.MILK_COFFEE, TipBautura.DAIRY);
+        assertThrows(ValidationException.class, () -> productService.addProduct(p));
     }
 }
