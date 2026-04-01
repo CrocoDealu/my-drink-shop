@@ -16,7 +16,9 @@ out/
 
 # Sistem - macOS
 .DS_Store
+*/.DS_Store
 
 # Date proiect (opțional, dacă nu vrei să le partajezi)
 orders.csv
 data/
+
