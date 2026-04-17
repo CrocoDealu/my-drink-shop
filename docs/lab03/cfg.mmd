@@ -1,0 +1,13 @@
+graph TD
+    1["1: String errors = '';"] --> 2{"2: if (item.getProduct().getId() <= 0)"}
+    2 -- True --> 3["3: errors += 'Product ID invalid!';"]
+    2 -- False --> 4{"4: if (item.getQuantity() <= 0)"}
+    3 --> 4
+    4 -- True --> 5["5: errors += 'Cantitate invalida!';"]
+    4 -- False --> 6{"6: if (!errors.isEmpty())"}
+    5 --> 6
+    6 -- True --> 7(["7: throw new ValidationException(errors);"])
+    6 -- False --> 8(["8: Ieșire normală (succes)"])
+    
+    classDef endNode fill:#f9f,stroke:#333,stroke-width:2px;
+    class 7,8 endNode;
